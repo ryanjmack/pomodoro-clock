@@ -1,3 +1,5 @@
+$primary:  #444;
+
 html {
   box-sizing: border-box;
   height: 100vh;
@@ -10,12 +12,31 @@ html {
 
 body {
   align-items: center;
+  background-color: $primary;
+  color: white;
   display: flex;
   flex-direction: column;
-  font-size: 1.2rem;
+  font: {
+    family: 'Nunito', sans-serif;
+    size: 1.2rem;
+  }
   height: 100%;
   justify-content: space-between;
   width: 100%;
+}
+
+button {
+  background-color: $primary;
+  border: 3px solid white;
+  border-radius: 3px;
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  padding: 0.5em 1em;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: darken($primary, 7%);
+  }
 }
 
 h1 {
@@ -28,18 +49,21 @@ h1 {
 }
 
 footer {
-  padding: 0.5em;
+  margin-bottom: 1em;
   text-align: center;
 
-  @media (min-width: 25em) {
-    padding: 1em;
-  }
-
-  a {
+  .link {
+    color: white;
+    display: block;
+    padding: 0.5em;
     text-decoration: none;
 
     &:hover {
-      color: goldenrod;
+      text-decoration: underline;
+    }
+
+    @media (min-width: 25em) {
+      padding: 1em;
     }
   }
 }
