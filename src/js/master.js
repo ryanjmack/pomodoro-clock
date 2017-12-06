@@ -45,7 +45,7 @@ function timer(seconds) {
 }
 
 // resets the timer in its entirety
-function reset() {
+function reset(e) {
   e.preventDefault();
   clearInterval(countdown);
   isTimerRunning = false;

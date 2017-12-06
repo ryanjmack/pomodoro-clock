@@ -37,6 +37,10 @@ button {
   &:hover {
     background-color: darken($primary, 7%);
   }
+
+  &:focus {
+    outline: none;
+  }
 }
 
 h1 {
