@@ -6,6 +6,8 @@
 
 // stores a reference to setInterval. Initialized in the function 'timer'
 let countdown;
+let isTimerRunning = false;
+const time = document.querySelector('.time');
 
 /***********************************************************************
 * timer function -- sets and resets the a timer saved to the variable
@@ -25,6 +27,7 @@ function timer(seconds) {
 
     if (timeLeft <= 0) {
       clearInterval(countdown);
+      alert("Time's up! Take a break, you deserve it!");
       return;
     }
     displayTimeLeft(timeLeft);
@@ -35,7 +38,7 @@ function timer(seconds) {
 function displayTimeLeft(seconds) {
   const minutes = Math.floor(seconds / 60);
   seconds %= 60;
-  console.log(padTime(minutes, seconds));
+  time.innerText = padTime(minutes, seconds);
 }
 
 // pads time so it is consistent and readable. Instead of '5:3'
@@ -45,4 +48,21 @@ function padTime(minutes, seconds) {
 }
 
 
-// timer(124);
+function handleEvent(e) {
+  if (e.keyCode && e.keyCode !== 32) {
+    return;
+  }
+  else if (isTimerRunning) {
+    clearInterval(countdown);
+  }
+  else {
+    let seconds = time.innerText.trim().split(':')
+         .reduce((a, b, i) => a += (i === 0) ? parseInt(b, 10) * 60 : parseInt(b, 10), 0);
+    timer(seconds);
+  }
+  isTimerRunning = !isTimerRunning;
+}
+
+
+window.addEventListener('keydown', handleEvent);
+time.addEventListener('click', handleEvent);
