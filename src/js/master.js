@@ -7,7 +7,13 @@
 // stores a reference to setInterval. Initialized in the function 'timer'
 let countdown;
 let isTimerRunning = false;
-const time = document.querySelector('.time');
+let isBreak = false;
+
+// DOM elements
+const time     = document.querySelector('.time');
+const controls = document.querySelector('.controls');
+const sessionLength = document.querySelector('.session-length');
+const breakLength = document.querySelector('.break-length');
 
 /***********************************************************************
 * timer function -- sets and resets the a timer saved to the variable
@@ -25,15 +31,22 @@ function timer(seconds) {
   countdown = setInterval(() => {
     timeLeft = Math.round((then - Date.now()) / 1000);
 
-    if (timeLeft <= 0) {
+    if (timeLeft < 0) {
       clearInterval(countdown);
-      alert("Time's up! Take a break, you deserve it!");
+      isBreak = !isBreak;
+      isTimerRunning = false;
+      alert("Time's up! " + (isBreak ? "Take a break! You deserve it!" : "Break's over! Get ready for another session!"));
+      time.innerText = (isBreak ? breakLength.innerText : sessionLength.innerText);
       return;
     }
     displayTimeLeft(timeLeft);
   }, 1000);
 }
 
+
+/***********************************************************************
+* View functions
+***********************************************************************/
 // takes in a parameter in seconds and formats it in a human friendly way
 function displayTimeLeft(seconds) {
   const minutes = Math.floor(seconds / 60);
@@ -44,10 +57,30 @@ function displayTimeLeft(seconds) {
 // pads time so it is consistent and readable. Instead of '5:3'
 // (5 minutes and 3 seconds), it returns a string '05:03'
 function padTime(minutes, seconds) {
-  return `${minutes < 10 ? '0': ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
 }
 
+// gets called when user wants to modify break or session length
+// takes in the DOM element and a boolean indicating whether user wants to add or sub time
+function adjustTime(element, isIncrementing) {
+  let length = element.innerText.split(':');
+  length[0] = parseInt(length[0]) + (isIncrementing ? 1 : -1);
+  length = length.join(":");
+  element.innerText = length;
 
+  if (!isTimerRunning) {
+    if (isBreak && element === breakLength) {
+      time.innerText = length;
+    }
+    else if (!isBreak && element === sessionLength){
+      time.innerText = length;
+    }
+  }
+}
+
+/***********************************************************************
+* Controller funtions
+***********************************************************************/
 function handleEvent(e) {
   if (e.keyCode && e.keyCode !== 32) {
     return;
@@ -64,5 +97,26 @@ function handleEvent(e) {
 }
 
 
+function handleControls(e) {
+  const classList = e.target.classList.value;
+
+  if (classList.includes('break-plus')) {
+    adjustTime(breakLength, true);
+  }
+  else if (classList.includes('break-minus')) {
+    adjustTime(breakLength, false);
+  }
+  else if (classList.includes('session-plus')) {
+    adjustTime(sessionLength, true);
+  }
+  else if (classList.includes('session-minus')) {
+    adjustTime(sessionLength, false);
+  }
+}
+
+/***********************************************************************
+* Event Listeners
+***********************************************************************/
 window.addEventListener('keydown', handleEvent);
 time.addEventListener('click', handleEvent);
+controls.addEventListener('click', handleControls);
