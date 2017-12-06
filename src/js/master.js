@@ -37,6 +37,7 @@ function timer(seconds) {
       isTimerRunning = false;
       alert("Time's up! " + (isBreak ? "Take a break! You deserve it!" : "Break's over! Get ready for another session!"));
       time.innerText = (isBreak ? breakLength.innerText : sessionLength.innerText);
+      document.title = "Pomodoro Clock"
       return;
     }
     displayTimeLeft(timeLeft);
@@ -50,6 +51,7 @@ function reset() {
   isTimerRunning = false;
   isBreak = false;
 
+  document.title = 'Pomodoro Clock';
   sessionLength.innerText = '25:00';
   breakLength.innerText = '5:00';
   time.innerText = '25:00';
@@ -63,7 +65,9 @@ function reset() {
 function displayTimeLeft(seconds) {
   const minutes = Math.floor(seconds / 60);
   seconds %= 60;
-  time.innerText = padTime(minutes, seconds);
+  const timeLeft = padTime(minutes, seconds);
+  time.innerText = timeLeft;
+  document.title = timeLeft;
 }
 
 // pads time so it is consistent and readable. Instead of '5:3'
