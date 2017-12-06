@@ -1,0 +1,44 @@
+.timer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .time {
+    margin: 0.6em 0 1em;
+    font-size: 3rem;
+    text-align: center;
+    width: 100%;
+
+    @media (min-width: 25em) {
+      font-size: 4rem;
+      margin: 0.8em 0 1.2em;
+    }
+  }
+}
+
+// section inside of .timer with a class of controls
+.controls {
+  display: flex;
+  justify-content: space-around;
+  max-width: 25em;
+  width: 100%;
+
+  &__break-length, &__session-length {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1em 0;
+    width: auto;
+
+    i {
+      margin: 0 0.3em;
+      padding: 0.5em;
+    }
+
+    p {
+      margin: 0 0 0.5em;
+      text-align: center;
+      width: 100%;
+    }
+  }
+}
