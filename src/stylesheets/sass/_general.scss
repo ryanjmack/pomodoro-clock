@@ -18,6 +18,28 @@ body {
   width: 100%;
 }
 
-.time {
-  font-size: 2em;
+h1 {
+  font-size: 1.5em;
+  margin-bottom: 0;
+
+  @media (min-width: 25em) {
+    font-size: 2em;
+  }
+}
+
+footer {
+  padding: 0.5em;
+  text-align: center;
+
+  @media (min-width: 25em) {
+    padding: 1em;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      color: goldenrod;
+    }
+  }
 }
