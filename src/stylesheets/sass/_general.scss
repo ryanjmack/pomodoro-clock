@@ -1,4 +1,4 @@
-$primary:  #444;
+$primary:  #ff4242;
 
 html {
   box-sizing: border-box;
@@ -22,42 +22,37 @@ body {
   }
   height: 100%;
   justify-content: space-between;
+  text-shadow: 1px 1px 0 darken($primary, 7%);
   width: 100%;
-}
 
-button {
-  background-color: $primary;
-  border: 3px solid white;
-  border-radius: 3px;
-  color: white;
-  font-family: 'Nunito', sans-serif;
-  padding: 0.5em 1em;
-  transition: all 0.3s;
-
-  &:hover {
-    background-color: darken($primary, 7%);
-  }
-
-  &:focus {
-    outline: none;
+  @media (min-width: 55em) {
+    font-size: 1.4rem;
   }
 }
 
 h1 {
-  font-size: 1.5em;
+  font-size: 2em;
   margin-bottom: 0;
+  text-shadow: 1px 2px 0 darken($primary, 7%);
 
   @media (min-width: 25em) {
-    font-size: 2em;
+    font: {
+      size: 2.5em;
+      weight: bold;
+    }
   }
 }
 
 footer {
-  margin-bottom: 1em;
+  background-color: #ddd;
+  margin: 0;
+  padding: 1em;
   text-align: center;
+  text-shadow: none;
+  width: 100%;
 
   .link {
-    color: white;
+    color: darken($primary, 3%);
     display: block;
     padding: 0.5em;
     text-decoration: none;
@@ -67,6 +62,7 @@ footer {
     }
 
     @media (min-width: 25em) {
+      font-size: 1.2em;
       padding: 1em;
     }
   }
