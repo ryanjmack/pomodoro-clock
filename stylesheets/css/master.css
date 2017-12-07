@@ -29,9 +29,6 @@ body {
           justify-content: space-between;
   text-shadow: 1px 1px 0 #ff1e1e;
   width: 100%; }
-  @media (min-width: 55em) {
-    body {
-      font-size: 1.4rem; } }
 
 h1 {
   font-size: 2em;
@@ -45,7 +42,7 @@ h1 {
 footer {
   background-color: #ddd;
   margin: 0;
-  padding: 1em;
+  padding: 0.2em;
   text-align: center;
   text-shadow: none;
   width: 100%; }
