@@ -82,7 +82,15 @@ function padTime(minutes, seconds) {
 function adjustTime(element, isIncrementing) {
   // get the length of time and modify it
   let length = element.innerText.split(':');
-  length[0] = parseInt(length[0]) + (isIncrementing ? 1 : -1);
+  length[0] = parseInt(length[0]);
+
+  // don't allow user to make session/break length < 0
+  if (length[0] === 0 && !isIncrementing) {
+    return;
+  }
+  else {
+     length[0] += (isIncrementing ? 1 : -1);
+  }
 
   // join the time and update the view
   length = length.join(":");
