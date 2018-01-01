@@ -1,4 +1,4 @@
-# [frontend-project-template] License
+# Pomodoro Clock License
 
 ## MIT License
 
